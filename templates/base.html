@@ -43,6 +43,7 @@
                 {% endblock %}
             </ul>
 
+            {% block feeds %}
             <h2>Feeds</h2>
                 <ul class="feeds">
                     <li><a href="/feed">Main Feed</a></li>
@@ -50,14 +51,18 @@
                     <li><a href="http://del.icio.us/rss/whalesalad">Del.icio.us Links</a></li>
                     <li><a href="http://www.flickr.com/services/feeds/photos_public.gne?id=24642662@N00&format=rss_200">Flickr Photos</a></li>
                 </ul>
+            {% endblock %}
 
+            {% block recent_entries %}
             <h2>Recent Entries</h2>
             <ul>
                 {% for e in recent_entries %}
                     <li>entry</li>
                 {% endfor %}
             </ul>
+            {% endblock %}
 
+            {% block homeboys %}
             <h2>My Homeboys (And Girls)</h2>
             <ul>
                 <li><a href="http://obeattie.com">Oliver Beattie <span>obeattie.com</span></a></li>
@@ -70,7 +75,9 @@
                 <li><a href="http://www.coryshaw.com">Cory Shaw <span>coryshaw.com</span></a></li>
                 <li><a href="http://katharineosborne.com">Katharine Osborne <span>katharineosborne.com</span></a></li>
             </ul>
+            {% endblock %}
 
+            {% block work %}
             <h2>My Work</h2>
             <ul>
                 <li><a href="http://tastyblogsnack.com">Tasty Blog Snack</a></li>
@@ -82,6 +89,7 @@
                 <li><a href="http://foxeysbakeshop.com">Foxey's Bake Shop</a></li>
                 <li><a href="http://fixieporn.com">Fixieporn</a></li>
             </ul>
+            {% endblock %}
 
             <div id="footer">
                 <p>Powered by <a href="http://djangoproject.org">Django</a> <span class="amp">&amp;</span> designed by Me.</p>
