@@ -2,7 +2,7 @@
 
 import os, sys
 sys.path.append('/usr/local/')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'whalesalads.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'whalesalad.settings'
 
 import django.core.handlers.wsgi
 
