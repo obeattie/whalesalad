@@ -1,16 +1,13 @@
 from django.conf.urls.defaults import *
+from django.contrib import admin
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+# Admin-site autodiscovery shiz
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^whalesalad/', include('whalesalad.foo.urls')),
-
-    # Uncomment the next line to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line for to enable the admin:
-    # (r'^admin/(.*)', admin.site.root),
+    (r'^blog/', include('whalesalad.blog.urls')),
+    
+    # Django admin shiz
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/(.*)', admin.site.root),
 )
