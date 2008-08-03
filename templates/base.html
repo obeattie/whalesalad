@@ -12,6 +12,8 @@
     <script src="/static/js/jquery.js" type="text/javascript"></script>
     <script src="/static/js/livequery.js" type="text/javascript"></script>
     <script src="/static/js/livesearch.js" type="text/javascript"></script>
+
+    <meta name="generator" content="Django" />
     
 </head>
 
@@ -26,14 +28,14 @@
                 <a href="/"><img src="/static/img/logo.png" alt="Whalesalad" /></a><hr />
                 <p>{% if user.is_authenticated and user.is_staff %}<a href="/admin/">Admin</a> &bull; <a href="/admin/logout/">Logout</a>{% else %}<p>The Personal Blog of Michael Whalen{% endif %}</p><hr />
                 <form name="searchForm" method="post" id="searchForm" action="/">
-                    <input type="text" id="s" name="s" value="<?php if (isset($_REQUEST['s'])) { echo $_REQUEST['s']; } else { ?>Type and wait...<?php } ?>" onClick="document.searchForm.s.value=''">
+                    <input type="text" id="s" name="s" value="Search is b0rked..." onClick="document.searchForm.s.value=''">
                 </form>
             </div>
-
+            
             <div class="about">
                 <p>Michael Whalen is an 18-year-old web developer working in beautiful Honolulu, Hawaii. He is currently lusting after Django, Javascript, and fixed-gear track bikes.  <a href="/about/">More &raquo;</a></p>
             </div>
-
+            
             <ul id="nav">
                 {% block nav %}
                 <li id="nav-blog"><a href="/">Blog</a></li>
@@ -42,7 +44,7 @@
                 <li id="nav-contact"><a href="/contact/">Contact</a></li>
                 {% endblock %}
             </ul>
-
+            
             {% block feeds %}
             <h2>Feeds</h2>
                 <ul class="feeds">
@@ -52,7 +54,7 @@
                     <li><a href="http://www.flickr.com/services/feeds/photos_public.gne?id=24642662@N00&format=rss_200">Flickr Photos</a></li>
                 </ul>
             {% endblock %}
-
+            
             {% block recent_entries %}
             <h2>Recent Entries</h2>
             <ul>
@@ -61,7 +63,7 @@
                 {% endfor %}
             </ul>
             {% endblock %}
-
+            
             {% block homeboys %}
             <h2>My Homeboys (And Girls)</h2>
             <ul>
@@ -76,7 +78,7 @@
                 <li><a href="http://katharineosborne.com">Katharine Osborne <span>katharineosborne.com</span></a></li>
             </ul>
             {% endblock %}
-
+            
             {% block work %}
             <h2>My Work</h2>
             <ul>
@@ -90,7 +92,7 @@
                 <li><a href="http://fixieporn.com">Fixieporn</a></li>
             </ul>
             {% endblock %}
-
+            
             <div id="footer">
                 <p>Powered by <a href="http://djangoproject.org">Django</a> <span class="amp">&amp;</span> designed by Me.</p>
                 <p class="disclaimer">The views I express here are not<br /> necessarily those of my employer.</p>
@@ -128,9 +130,9 @@
         {% endblock %}
         </div>
         <!-- end #content -->
-
+        
     </div>
     <!-- end #wrapper -->
-
+    
 </body>
 </html>
