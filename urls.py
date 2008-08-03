@@ -15,10 +15,10 @@ urlpatterns = patterns('',
     
     # Miscellaneous URLs and stuff
     url(r'^/?$', blog_views.index, name='home'),
-    url(r'^about/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'about.html' }),
-    url(r'^elixir/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'elixir.html' }),
+    url(r'^about/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'static/about.html' }),
+    url(r'^elixir/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'static/elixir.html' }),
     # Contact as static for now until its dynamic :D
-    url(r'^contact/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'contact.html' }),
+    url(r'^contact/$', 'django.views.generic.simple.direct_to_template', { 'template' : 'static/contact.html' }),
     
     # Django admin shiz
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

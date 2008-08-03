@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from whalesalad.blog.managers import PostManager
+from whalesalad.comments.models import Comment
 from whalesalad.generic.tagging.models import Tag as GenericTag, TagManager as GenericTagManager
 from whalesalad.generic.tagging.fields import TagField
 from whalesalad.metadata.models import Category
@@ -39,6 +40,10 @@ class Post(models.Model):
             'day': self.published.day,
             'slug': self.slug,
         })
+    
+    def get_comment_count(self):
+        comment_count = Comment.objects.get(object_id=self.id)
+        return comment_count
     
     def get_admin_url(self):
         return u'/admin/blog/post/%s/' % quote(self.id)

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}{{ block.super }} &raquo; About{% endblock %}
+{% block body %}about{% endblock %}
+
+{% block content %}
+{% if post %}
+<div class="post" id="post-{{ post.id }}">
+    <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
+    <h3>Posted {{ post.published|timesince }} ago at {{ post.published|time:"P" }} <a href="{{ post.get_absolute_url }}#comments">{{ post.get_comment_count|length }} comments</a>.{% if user.is_staff %} <a href="{{ post.get_admin_url }}">Edit Post</a>{% endif %}</h3>
+    {{ post.body|linebreaks }}
+    {{ post.intro|linebreaks }}
+</div>
+{% else %}
+<div class="post" id="post-<?php the_ID(); ?>">
+    <h2>Nothing to see here</h2>
+    <p>You seemed to have found a mislinked file, page, or search query with zero results. If you feel that you've reached this page in error, double check the URL and or search string and try again.</p>
+    <p>Alternatively, a more personalized method of tracking down and searching for content can be found <a href="#bottom_box">below</a>.</p>
+</div>
+{% endif %}
+
+<div class="commentArea">
+<?php comments_template(); ?>
+</div>
+
+{% endblock %}
