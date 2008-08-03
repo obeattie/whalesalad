@@ -1,0 +1,53 @@
+8
+
+dir
+64
+https://svn.bluelavatech.com/svn/blt/trunk/comments/lib
+https://svn.bluelavatech.com/svn/blt
+
+
+
+2008-06-07T04:15:14.073523Z
+28
+obeattie
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+8256f314-a852-45c0-ae1c-453593c67b45
+
+akismet.py
+file
+
+
+
+
+2008-07-15T10:13:18.000000Z
+5168c736d33a105848ffcff88a5e9704
+2008-06-07T04:15:14.073523Z
+28
+obeattie
+has-props
+
+__init__.py
+file
+
+
+
+
+2008-07-15T10:13:18.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2008-06-07T04:15:14.073523Z
+28
+obeattie
+
