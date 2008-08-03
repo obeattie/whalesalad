@@ -15,7 +15,7 @@
     
 </head>
 
-<body>
+<body id="{% block body %}blog{% endblock %}">
     <div id="upperBar"></div>
     <div id="wrapper"> 
         
@@ -36,35 +36,20 @@
 
             <ul id="nav">
                 {% block nav %}
-                <li><a id="nav-home" href="/">Blog</a></li>
-                <li><a id="nav-elixir" href="/elixir/">Elixir <span>Updated 1/14/08!</span></a></li>        
-                <li><a id="nav-about" href="/about/">About</a></li>
-                <li><a id="nav-contact" href="/contact/">Contact</a></li>                    
+                <li id="nav-blog"><a href="/">Blog</a></li>
+                <li id="nav-elixir"><a href="/elixir/">Elixir <span>Updated 1/14/08!</span></a></li>        
+                <li id="nav-about"><a href="/about/">About</a></li>
+                <li id="nav-contact"><a href="/contact/">Contact</a></li>                    
                 {% endblock %}
             </ul>
 
-            <?php if (is_page('about')) { ?>
             <h2>Feeds</h2>
                 <ul class="feeds">
                     <li><a href="/feed">Main Feed</a></li>
                     <li><a href="/comments/feed">Comments Feed</a></li>
                     <li><a href="http://del.icio.us/rss/whalesalad">Del.icio.us Links</a></li>
                     <li><a href="http://www.flickr.com/services/feeds/photos_public.gne?id=24642662@N00&format=rss_200">Flickr Photos</a></li>
-                    <li><a href="http://www.digg.com/rss/whalesalad/index2.xml">Dugg Stories</a></li>
                 </ul>
-
-            <h2>Awards (FOR MOSCOW)</h2>
-                <ul>
-                    <li><a href="http://thesis.veracon.net/">CSS Thesis</a></li>
-                    <li><a href="http://www.cssremix.com/archives/866">CSS Remix [Editors Choice]</a></li>
-                    <li><a href="http://www.webcreme.com/2006/06/whalesalad/">Webcreme</a></li>
-                    <li><a href="http://cssmania.com/galleries/2006/06/06/whalesalad.php">CSS Mania</a></li>
-                    <li><a href="http://www.cssimport.com/june05.htm">CSS Import</a></li>
-                    <li><a href="http://www.cssdrive.com/index.php/main/galleryitem/whalesalad/">CSS Drive</a></li>
-                    <li><a href="http://www.cssbloom.com/2006/06/17/whalesalad/">CSS Bloom</a></li>
-                    <li><a href="http://www.designmeltdown.com/chapters/SuperClean/Part2.aspx">Design Meltdown</a></li>
-                </ul>
-            <?php } ?>
 
             <h2>Recent Entries</h2>
             <ul>
@@ -95,13 +80,14 @@
                 <li><a href="http://schoolrack.com">SchoolRack</a></li>
                 <li><a href="http://kindfish.com">Kindfish</a></li>
                 <li><a href="http://foxeysbakeshop.com">Foxey's Bake Shop</a></li>
+                <li><a href="http://fixieporn.com">Fixieporn</a></li>
             </ul>
 
             <div id="footer">
-                <p>Powered by Django.</p>
-                <p>Designed by Me.</p>
+                <p>Powered by <a href="http://djangoproject.org">Django</a> <span class="amp">&amp;</span> designed by Me.</p>
+                <p class="disclaimer">The views I express here are not<br /> necessarily those of my employer.</p>
             </div>
-            <p><small>The views I express here are not<br /> necessarily those of my employer.</small></p>
+            
             {% endblock %}
         </div>
         <!-- end #sidebar -->
@@ -124,7 +110,6 @@
                 <p>Alternatively, a more personalized method of tracking down and searching for content can be found <a href="#bottom_box">below</a>.</p>
             </div>
         {% endif %}
-
 
             <div class="nextprevious">
                 <div class="left"><?php next_posts_link('&laquo; Older Entries') ?></div>

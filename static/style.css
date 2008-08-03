@@ -161,15 +161,15 @@ body {
             width: 120px;
             float: left;
             margin-top: 5px;
-			text-align: right;
+            text-align: right;
         }
 
-			#content ol.commentlist li .commentMeta img.avatar {
-				margin: 7px 0 10px 0;
-				padding: 1px;
-				background-color: #5B5B5B;
-				border: 1px solid #747474;
-			}	
+            #content ol.commentlist li .commentMeta img.avatar {
+                margin: 7px 0 10px 0;
+                padding: 1px;
+                background-color: #5B5B5B;
+                border: 1px solid #747474;
+            }   
         
             #content ol.commentlist li .commentMeta span {
                 display: block;
@@ -431,18 +431,20 @@ body {
         background: url(/static/img/nav_off.png) 0 -31px no-repeat;
     }        
     
-    #sidebar ul#nav li a.active {
+    body#blog #sidebar ul#nav li#nav-blog a,
+    body#about #sidebar ul#nav li#nav-about a,
+    body#elixir #sidebar ul#nav li#nav-elixir a,
+    body#contact #sidebar ul#nav li#nav-contact a {
         background: url(/static/img/nav_on.png) 0 0 no-repeat;
         color: #FFF;
     }
     
-    #sidebar ul#nav li a.active span {
+    body#elixir #sidebar ul#nav li#nav-elixir a span {
         color: #F5A4C0;
     }
 
     #sidebar #footer {
-        border-top: 3px solid #444;
-        border-bottom: 1px solid #444;
+        border-top: 3px double #222;
         padding: 7px 0;
         font-size: 11px;
         display: block;
@@ -454,10 +456,10 @@ body {
             color: #999;
         }
 
-		#sidebar p small {
-			font: 11px Helvetica, Arial, Sans-serif;
-			color: #555;
-		}
+        #sidebar #footer p.disclaimer {
+            color: #333;
+            font-style: italic;
+        }
 
         #sidebar #footer a {
             color: #999;
@@ -467,14 +469,10 @@ body {
             text-decoration: none;
             color: #CCC;
         }
-    
-    #sidebar .skribit {
-        margin: 0 auto 15px auto;
-        display: block;
-        height: 330px;
-        width: 220px;
-    }
-
+        
+        #footer .amp {
+            font: italic 1.2em "Baskerville", "Goudy Old Style", "Palatino", "Book Antiqua", serif;
+        }
 
 .clearfix {
     clear: both;
