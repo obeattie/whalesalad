@@ -22,8 +22,8 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, blank=True, null=True, related_name='blog_posts')
     tags = TagField(blank=True, null=True, model=PostTag)
     # The post
-    intro = models.TextField(_(u'introduction'), blank=False, null=False, help_text=_(u'Use Markdown to add formatting'))
-    body = models.TextField(_(u'post body'), blank=True, null=True, help_text=_(u'Use Markdown to add formatting'))
+    intro = models.TextField(_(u'introduction'), blank=False, null=False)
+    body = models.TextField(_(u'post body'), blank=True, null=True)
     # Manager
     objects = PostManager()
     
