@@ -40,10 +40,6 @@ class Post(models.Model):
             'day': self.published.day,
             'slug': self.slug,
         })
-    
-    def get_comment_count(self):
-        comment_count = Comment.objects.get(object_id=self.id)
-        return comment_count
-    
+        
     def get_admin_url(self):
         return u'/admin/blog/post/%s/' % quote(self.id)
