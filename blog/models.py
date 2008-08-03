@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.util import quote
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -38,3 +39,6 @@ class Post(models.Model):
             'day': self.published.day,
             'slug': self.slug,
         })
+    
+    def get_admin_url(self):
+        return u'/admin/blog/post/%s/' % quote(self.id)

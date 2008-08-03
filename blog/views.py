@@ -13,7 +13,7 @@ def index(request, page=None):
         paginate_by=10,
         page=int(page),
         template_name='home.html',
-        template_object_name='posts'
+        template_object_name='post'
     )
 
 def post_detail(request, year, month, day, slug):
