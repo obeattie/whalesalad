@@ -1,7 +1,7 @@
 """Views for the blog application."""
 from django.views.generic import date_based as generic_date_based
 
-from obeattie.blog import models as blog_models
+from whalesalad.blog import models as blog_models
 
 def post_detail(request, year, month, day, slug):
     """The detail view for posts. Just a wrapper around django.views.generic.simple.date_based.object_detail

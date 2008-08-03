@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^blog/', include('whalesalad.blog.urls')),
+    (r'^', include('whalesalad.blog.urls')),
     
     # Django admin shiz
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
