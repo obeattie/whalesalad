@@ -1,7 +1,20 @@
 """Views for the blog application."""
-from django.views.generic import date_based as generic_date_based
+from django.views.generic import date_based as generic_date_based, list_detail as generic_list_detail
 
 from whalesalad.blog import models as blog_models
+
+def index(request, page=None):
+    """The site home page and blog archive view."""
+    page = page or request.GET.get('page', 1)
+    
+    return generic_list_detail.object_list(
+        request=request,
+        queryset=blog_models.Post.objects.get_public(),
+        paginate_by=10,
+        page=int(page),
+        template_name='home.html',
+        template_object_name='posts'
+    )
 
 def post_detail(request, year, month, day, slug):
     """The detail view for posts. Just a wrapper around django.views.generic.simple.date_based.object_detail

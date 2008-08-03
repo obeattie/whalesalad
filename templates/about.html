@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} &raquo; About{% endblock %}
+
+{% block content %}
+    <img class="aboutImg" src="/static/about/me.jpg" />
+    <p>Hey there ladies and gents. My name is Michael Whalen, and I am a web developer. Since I was a kid, I have been fascinated and intrigued by technology. For the past few years I've been working hard at becoming a stellar web designer, and have been having an awesome time. Looking back at where I have come from, where I am now, and the what the future looks like future is a daunting and exciting thought.</p>
+
+    <h4>Work</h4>
+    <img class="aboutImg" src="/static/about/kindfish.jpg" />
+    <p>Right now I am working full time at a technology company in downtown Honolulu called <a href="http://www.bluelavatech.com/">Blue Lava</a>. I was working on their <a href="http://www.kindfish.com/">Kindfish</a> product, but we've shifted focus and are working on a brand new, totally cool site that (we're hoping) will revolutionize the way people organize their photos. I love the team at Blue Lava, and unlike most Americans, enjoy heading in to work each day!</p>
+
+    <h4>SchoolRack</h4>
+    <img class="aboutImg" src="/static/about/schoolrack.jpg" />
+    <p>My true passion lies with SchoolRack. <a href="http://www.devskunk.com" title="Site coming REAL soon!">My team and I</a> were contracted a few months ago to redesign and redevelop <a href="http://www.schoolrack.com/">SchoolRack</a>, a website dedicated to teachers. SchoolRack aims to help bring students and teachers closer together outside of the classroom by giving teachers the ability to post information online, upload files for download, and manage mailing lists for parents and students. We're actively working on the website and are working around the clock to release the 2nd phase of the new design by the end of August. For those wondering, we built SchoolRack in my new love affair, <a href="http://www.djangoproject.org">Django</a>.</p>
+
+    <h4>EJZ</h4>
+    <img class="aboutImg" src="/static/about/elan.jpg" />
+    <p>Speaking of love affairs, if you want to know about me, then you definitely want to know who the wonderful, beautiful, funny, smart, sexy, and gorgeous Elan Zelenka is. Elan is the love of my life, and pretty much the reason that I wake up in the morning, and the reason I am so motivated to work on all of these difficult web projects. While I am stuck here in paradise working on everything I have ever dreamed of, she's stuck in Los Angeles for her last year in high school. We're both very excited about the future, and cannot wait to be reunited!</p>
+
+    <h4>Devskunk</h4>
+    <img class="aboutImg" src="/static/about/devskunk.jpg" />
+    <p>Back to the team, <a href="http://www.devskunk.com">Devskunk</a>. Devskunk was born at the beginning of this year out of frustration caused by various projects we were working on. We're composed of Jason Skicewicz, an all-star system architect with years of experience with various back end technologies, Nesan Waran, another amazingly talented system architect with vast experience and specialty in ui design, and of course myself, the creative interface designer specializing in XHTML and CSS. We've got a ton of ideas, and a ton of talent, but we're lacking the funds and the time to get ourselves off the ground right now. Hopefully we'll have our own <a href="http://www.devskunk.com">Devskunk</a> website up real soon.</p>
+
+    <h4>The 'Salad</h4>
+    <img class="aboutImg" src="/static/about/php.jpg" />
+    <p>Finally, Whalesalad.com (the site you're on right now) is being powered by a fresh copy of Wordpress <?php bloginfo('version'); ?>. and a lightweight custom theme coined Elixir. I got tired of my old <a href="http://www.whalesalad3.com">Moscow</a> theme, and created this as a temporary theme until WS4 "Fusion" is released. If you like what you see, you're in luck, because I've released the theme free of charge in five fruitalicious colors! <a href="/2007/07/23/elixir/">Check it out &raquo;</a></p>
+
+    <h4>For the stats junkies</h4>
+    <p>The site currently consists of <strong><?php echo $numposts; ?></strong> posts and <strong><?php echo $numcomms; ?></strong> comments. The site is currently runnin' hot on a screamin' dedicated server, which also happens to be the playground and sandbox of <a href="http://devskunk.com">Devskunk</a>. <?php printf(__('<a href="http://www.akismet.com">Akismet</a> has caught <strong>%1$s</strong> spam messages since installation.'), number_format($count) ); ?></p>
+
+{% endblock %}

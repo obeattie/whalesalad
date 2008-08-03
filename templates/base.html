@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>{% block title %}Whalesalad &raquo; The Blog of Michael Whalen{% endblock %}</title>
+    <script src="/mint/?js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
+    <script src="/static/js/jquery.js" type="text/javascript"></script>
+    <script src="/static/js/livequery.js" type="text/javascript"></script>
+    <script src="/static/js/livesearch.js" type="text/javascript"></script> 
+    
+</head>
+
+<body>
+    <div id="upperBar"></div>
+    <div id="wrapper"> 
+        
+        <div id="sidebar">
+            {% block sidebar %}
+            <div id="upperBox">
+                <h1>whalesalad</h1>
+                <a href="/"><img src="/static/img/logo.png" alt="Whalesalad" /></a><hr />
+                <p>The Personal Blog of Michael Whalen</p><hr />
+                <form name="searchForm" method="post" id="searchForm" action="/">
+                    <input type="text" id="s" name="s" value="<?php if (isset($_REQUEST['s'])) { echo $_REQUEST['s']; } else { ?>Type and wait...<?php } ?>" onClick="document.searchForm.s.value=''">
+                </form>
+            </div>
+
+            <div class="about">
+                <p>Michael Whalen is an 18-year-old web developer working in beautiful Honolulu, Hawaii. He is currently lusting after Django, Javascript, and fixed-gear track bikes.  <a href="/about/">More &raquo;</a></p>
+            </div>
+
+            <ul id="nav">
+                {% block nav %}
+                <li><a id="nav-home" href="/">Blog</a></li>
+                <li><a id="nav-elixir" href="/elixir/">Elixir <span>Updated 1/14/08!</span></a></li>        
+                <li><a id="nav-about" href="/about/">About</a></li>
+                <li><a id="nav-contact" href="/contact/">Contact</a></li>                    
+                {% endblock %}
+            </ul>
+
+            <?php if (is_page('about')) { ?>
+            <h2>Feeds</h2>
+                <ul class="feeds">
+                    <li><a href="/feed">Main Feed</a></li>
+                    <li><a href="/comments/feed">Comments Feed</a></li>
+                    <li><a href="http://del.icio.us/rss/whalesalad">Del.icio.us Links</a></li>
+                    <li><a href="http://www.flickr.com/services/feeds/photos_public.gne?id=24642662@N00&format=rss_200">Flickr Photos</a></li>
+                    <li><a href="http://www.digg.com/rss/whalesalad/index2.xml">Dugg Stories</a></li>
+                </ul>
+
+            <h2>Awards (FOR MOSCOW)</h2>
+                <ul>
+                    <li><a href="http://thesis.veracon.net/">CSS Thesis</a></li>
+                    <li><a href="http://www.cssremix.com/archives/866">CSS Remix [Editors Choice]</a></li>
+                    <li><a href="http://www.webcreme.com/2006/06/whalesalad/">Webcreme</a></li>
+                    <li><a href="http://cssmania.com/galleries/2006/06/06/whalesalad.php">CSS Mania</a></li>
+                    <li><a href="http://www.cssimport.com/june05.htm">CSS Import</a></li>
+                    <li><a href="http://www.cssdrive.com/index.php/main/galleryitem/whalesalad/">CSS Drive</a></li>
+                    <li><a href="http://www.cssbloom.com/2006/06/17/whalesalad/">CSS Bloom</a></li>
+                    <li><a href="http://www.designmeltdown.com/chapters/SuperClean/Part2.aspx">Design Meltdown</a></li>
+                </ul>
+            <?php } ?>
+
+            <h2>Recent Entries</h2>
+            <ul>
+                {% for e in recent_entries %}
+                    <li>entry</li>
+                {% endfor %}
+            </ul>
+
+            <h2>My Homeboys (And Girls)</h2>
+            <ul>
+                <li><a href="http://obeattie.com">Oliver Beattie <span>obeattie.com</span></a></li>
+                <li><a href="http://aprilzero.com">Anand Sharma <span>aprilzero.com</span></a></li>
+                <li><a href="http://is.derekpunsalan.com">Derek Punsalan <span>is.derekpunsalan.com</span></a></li>
+                <li><a href="http://tastyblogsnack.com">Justine Ezarik <span>tastyblogsnack.com</span></a></li>
+                <li><a href="http://alexisthemovie.com">Alex Zhao <span>alexisthemovie.com</span></a></li>
+                <li><a href="http://pstam.com">Paul Stamatiou <span>paulstamatiou.com</span></a></li>
+                <li><a href="http://levimccallum.com">Levi McCallum <span>levimccallum.com</span></a></li>
+                <li><a href="http://www.coryshaw.com">Cory Shaw <span>coryshaw.com</span></a></li>
+                <li><a href="http://katharineosborne.com">Katharine Osborne <span>katharineosborne.com</span></a></li>
+            </ul>
+
+            <h2>My Work</h2>
+            <ul>
+                <li><a href="http://tastyblogsnack.com">Tasty Blog Snack</a></li>
+                <li><a href="http://thecssthesis.com">CSS Thesis</a></li>
+                <li><a href="http://groovr.com"><s>Groovr</s></a></li>
+                <li><a href="http://ilovephotos.com">iLovePhotos</a></li>
+                <li><a href="http://schoolrack.com">SchoolRack</a></li>
+                <li><a href="http://kindfish.com">Kindfish</a></li>
+                <li><a href="http://foxeysbakeshop.com">Foxey's Bake Shop</a></li>
+            </ul>
+
+            <div id="footer">
+                <p>Powered by Django.</p>
+                <p>Designed by Me.</p>
+            </div>
+            <p><small>The views I express here are not<br /> necessarily those of my employer.</small></p>
+            {% endblock %}
+        </div>
+        <!-- end #sidebar -->
+        
+        <div id="content" class="after">
+        {% block content %}
+        {% if posts %}
+            {% for post in posts %}
+            <div class="post" id="post-{{ post.id }}">
+                <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
+                <h3>Posted {{ post.published|timesince }} ago at {{ post.published|timesince }}. <a href="{{ post.get_absolute_url }}#comments">XXX</a>{% if user.is_staff %}Edit Post{% endif %}</h3>
+                {{ post.intro|linebreaks }}
+                <a href="{{ post.get_absolute_url }}">Continue Reading...</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="post" id="post-<?php the_ID(); ?>">
+                <h2>Nothing to see here</h2>
+                <p>You seemed to have found a mislinked file, page, or search query with zero results. If you feel that you've reached this page in error, double check the URL and or search string and try again.</p>
+                <p>Alternatively, a more personalized method of tracking down and searching for content can be found <a href="#bottom_box">below</a>.</p>
+            </div>
+        {% endif %}
+
+
+            <div class="nextprevious">
+                <div class="left"><?php next_posts_link('&laquo; Older Entries') ?></div>
+                <div class="right"><?php previous_posts_link('Recent Entries &raquo;') ?></div>
+            </div>
+            
+        {% endblock %}
+        </div>
+        <!-- end #content -->
+
+    </div>
+    <!-- end #wrapper -->
+
+</body>
+</html>
