@@ -21,6 +21,7 @@ class Comment(models.Model):
     approved = models.BooleanField('approved by staff', default=False, help_text=u'If True, then this comment will always be displayed, regardless of spam filtering stuff.')
     spam = models.BooleanField('akismet thinks this is spam', default=False, editable=False)
     processed = models.BooleanField('processed by the filters', default=False, editable=False)
+    is_whale = models.BooleanField('This comment was written by Michael', default=False, editable=True, help_text=u'If this is true, Michael posted the comment so adjust the template to reflect it\'s his comment')
     # Content Types stuff
     content_type = models.ForeignKey(ContentType, blank=False, null=False)
     object_id = models.PositiveIntegerField(blank=False, null=False)

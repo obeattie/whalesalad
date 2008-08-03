@@ -24,7 +24,7 @@
             <div id="upperBox">
                 <h1>whalesalad</h1>
                 <a href="/"><img src="/static/img/logo.png" alt="Whalesalad" /></a><hr />
-                <p>The Personal Blog of Michael Whalen</p><hr />
+                <p>{% if user.is_authenticated and user.is_staff %}<a href="/admin/">Admin</a> &bull; <a href="/admin/logout/">Logout</a>{% else %}<p>The Personal Blog of Michael Whalen{% endif %}</p><hr />
                 <form name="searchForm" method="post" id="searchForm" action="/">
                     <input type="text" id="s" name="s" value="<?php if (isset($_REQUEST['s'])) { echo $_REQUEST['s']; } else { ?>Type and wait...<?php } ?>" onClick="document.searchForm.s.value=''">
                 </form>
@@ -37,9 +37,9 @@
             <ul id="nav">
                 {% block nav %}
                 <li id="nav-blog"><a href="/">Blog</a></li>
-                <li id="nav-elixir"><a href="/elixir/">Elixir <span>Updated 1/14/08!</span></a></li>        
+                <li id="nav-elixir"><a href="/elixir/">Elixir <span>Updated 1/14/08!</span></a></li>
                 <li id="nav-about"><a href="/about/">About</a></li>
-                <li id="nav-contact"><a href="/contact/">Contact</a></li>                    
+                <li id="nav-contact"><a href="/contact/">Contact</a></li>
                 {% endblock %}
             </ul>
 

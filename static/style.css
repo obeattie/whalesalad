@@ -369,6 +369,11 @@ body {
         font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
     }
     
+    #sidebar #upperBox p a {
+        color: #FFF;
+        text-transform: uppercase;
+    }
+    
     #sidebar #upperBox input {
         height: 18px;
         padding: 5px 5px 5px 25px;
