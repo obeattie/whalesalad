@@ -1,18 +1,13 @@
-/*  
-Theme Name: Whalesalad v3.5 - Elixir
-Theme URI: http://www.whalesalad.com
-Description: A temporary theme between Moscow and Fusion.
-Version: 3.5
-Author: Michael Whalen
-Author URI: http://www.whalesalad.com/
+/*
+    Whalesalad Elixir -- Djangoized
 */
 
 * { margin: 0; padding: 0; list-style: none; }
 
 body {
     background: url(/static/img/bg_leftsidebar.png) top center repeat-y;
+    font-family: "Lucida Grande",Tahoma,"Lucida Sans Unicode",Verdana,sans-serif;
     color: #FFF;
-    font-family: "Lucida Grande",Tahoma,"Lucida Sans Unicode",Verdana,sans-serif;;
 }
 
 #upperBar {
@@ -49,8 +44,9 @@ body {
         color: #FFF;
         text-decoration: none;
         padding: 3px 0;
-        font: 24px Arial, Helvetica, Sans-serif;
-        letter-spacing: -1px;
+/*        font: 24px Helvetica, Arial, Sans-serif;*/
+        font: 24px "HelveticaNeue", Helvetica, Arial, sans-serif;
+/*        letter-spacing: -1px;*/
     }
 
     #content .post h2 a:hover {
@@ -58,7 +54,7 @@ body {
     }
     
     #content .post h3 {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: normal;
         color: #999;
         margin-bottom: 10px;
@@ -250,11 +246,7 @@ body {
         float: right;
     }
     
-    #content .adBrite {
-        display: block;
-        margin-bottom: 20px;
-        border: 1px solid #333;
-    }
+    /* /// Elixir Download Specific Styles /// */
     
     #content .elixirUpdate {
         border: 3px solid #FDDC9A;
@@ -301,6 +293,48 @@ body {
         color: #FFF;
     }
 
+    .elixirDownloadCounts li {
+      width: 74px;
+      border: 2px solid #FFF;
+      display: block;
+      float: left;
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    .elixirDownloadCounts li.last {
+      margin: 0;
+    }
+
+    .elixirDownloadCounts li h5 {
+      display: block;
+      padding: 5px;
+      background: #333;
+    }
+
+    .elixirDownloadCounts li p {
+      font-size: 20px !important;
+      margin: 0 !important;
+      padding: 10px 0;
+    }
+
+      .elixirDownloadCounts li.classic { background: #F14E78; }
+          .elixirDownloadCounts li.classic h5 { background: #ED1F54; color: #4D0A1B; }
+
+      .elixirDownloadCounts li.purple { background: #A853FB; }
+          .elixirDownloadCounts li.purple h5 { background: #8F21FA; color: #24083F; }
+
+      .elixirDownloadCounts li.orange { background: #F9B04A; margin: 0; }
+          .elixirDownloadCounts li.orange h5 { background: #F79B19; color: #472D07; }
+
+      .elixirDownloadCounts li.lime { background: #CEF960; }
+          .elixirDownloadCounts li.lime h5 { background: #B8F716; color: #354706; }
+
+      .elixirDownloadCounts li.blue { background: #54C8FD; }
+          .elixirDownloadCounts li.blue h5 { background: #21B8FD; color: #0A384D; }
+
+/* /// Sidebar Styles /// */
+
 #sidebar {
     width: 232px;
     float: left;
@@ -330,8 +364,9 @@ body {
     
     #sidebar #upperBox p {
         margin: 5px 0;
-        font-size: 10px;
+        font-size: 11px;
         text-align: center;
+        font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
     }
     
     #sidebar #upperBox input {
@@ -357,6 +392,8 @@ body {
         font-size: 16px;
         text-transform: uppercase;
         margin-bottom: 10px;
+        font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+        text-shadow: 1px 1px 1px #111;
     }
     
     #sidebar a img {
@@ -418,6 +455,8 @@ body {
         font-weight: bold;
         color: #999;
         position: relative;
+        font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
+        text-shadow: 1px 1px 1px #111;
     }
     
     #sidebar ul#nav li a span {
@@ -437,11 +476,14 @@ body {
     body#contact #sidebar ul#nav li#nav-contact a {
         background: url(/static/img/nav_on.png) 0 0 no-repeat;
         color: #FFF;
+        text-shadow: 1px 1px 1px #AF003E;
     }
     
     body#elixir #sidebar ul#nav li#nav-elixir a span {
         color: #F5A4C0;
     }
+    
+    /* /// Footer (Sidebar) Styles /// */
 
     #sidebar #footer {
         border-top: 3px double #222;
@@ -449,6 +491,7 @@ body {
         font-size: 11px;
         display: block;
         margin-bottom: 10px;
+        font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
     }
 
         #sidebar #footer p {
@@ -474,49 +517,7 @@ body {
             font: italic 1.2em "Baskerville", "Goudy Old Style", "Palatino", "Book Antiqua", serif;
         }
 
-.clearfix {
-    clear: both;
-}   
-
-.elixirDownloadCounts li {
-    width: 74px;
-    border: 2px solid #FFF;
-    display: block;
-    float: left;
-    margin-right: 10px;
-    text-align: center;
-}
-
-.elixirDownloadCounts li.last {
-    margin: 0;
-}
-    
-.elixirDownloadCounts li h5 {
-    display: block;
-    padding: 5px;
-    background: #333;
-}
-
-.elixirDownloadCounts li p {
-    font-size: 20px !important;
-    margin: 0 !important;
-    padding: 10px 0;
-}
-    
-    .elixirDownloadCounts li.classic { background: #F14E78; }
-        .elixirDownloadCounts li.classic h5 { background: #ED1F54; color: #4D0A1B; }
-
-    .elixirDownloadCounts li.purple { background: #A853FB; }
-        .elixirDownloadCounts li.purple h5 { background: #8F21FA; color: #24083F; }
-
-    .elixirDownloadCounts li.orange { background: #F9B04A; margin: 0; }
-        .elixirDownloadCounts li.orange h5 { background: #F79B19; color: #472D07; }
-
-    .elixirDownloadCounts li.lime { background: #CEF960; }
-        .elixirDownloadCounts li.lime h5 { background: #B8F716; color: #354706; }
-    
-    .elixirDownloadCounts li.blue { background: #54C8FD; }
-        .elixirDownloadCounts li.blue h5 { background: #21B8FD; color: #0A384D; }
+/* /// Ajax Livesearch Styles /// */
 
 ul.searchResults li a {
     padding: 5px;
@@ -573,10 +574,14 @@ ul.searchResults li a {
     color: #666;
 }
 
+/* /// Universal Helper Styles /// */
+
+.clearfix { clear: both; }  
+
 .after:after {
     content: ".";
     display: block;
     visibility: hidden;
     height: 0;
     clear: both;
-}
+} 
