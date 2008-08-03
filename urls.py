@@ -7,7 +7,6 @@ from whalesalad.blog import redirects as blog_redirects, views as blog_views
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
     # Application includes
     url(r'^blog/', include('whalesalad.blog.urls')),
     
