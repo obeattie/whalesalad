@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     # Application includes
-    ur;(r'^blog/', include('whalesalad.blog.urls')),
+    url(r'^blog/', include('whalesalad.blog.urls')),
     
     # Wordpress redirect relics
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[\w-]+)/$', blog_redirects.post_detail, name='wp_post_detail'),
