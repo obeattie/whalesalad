@@ -53,18 +53,19 @@ def migrate_tags(wp_post_id, django_post_obj):
     """Migrates tags from the Wordpress taxonomy tables to PostTags."""
     # One ugly query
     wp_cursor.execute('SELECT `wp_terms`.`name` FROM `wp_posts` LEFT OUTER JOIN `wp_term_relationships` ON `wp_term_relationships`.`object_id` = `wp_posts`.`ID` INNER JOIN `wp_term_taxonomy` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` INNER JOIN `wp_terms` ON `wp_terms`.`term_id` = `wp_term_taxonomy`.`term_id` WHERE `wp_term_taxonomy`.`taxonomy` = \'post_tag\' AND `wp_posts`.`ID` = %i;' % wp_post_id)
-    tags = ''
     for tag in wp_cursor.fetchall():
+        # If the tag name contains spaces, then it needs to be quoted before being passed to
+        # parse_tag_input (in generic.tagging.utils)
         tag_name = tag['name']
         if len(tag_name.split(' ')) > 1:
             tag_name = '"%s"' % tag_name
-        tags = '%s %s' % (tags, tag_name)
-    print tags
-    django_post_obj.tags = tags
+        # Append this to the existing list of tags
+        django_post_obj.tags = '%s %s' % (django_post_obj.tags, tag_name)
     django_post_obj.save()
 
 def migrate_categories(wp_post_id, django_post_obj):
     """Migrates tags from the Wordpress taxonomy tables to our Category model."""
+    # Another goddamn ugly query...
     wp_cursor.execute('SELECT `wp_terms`.`name`, `wp_terms`.`slug` FROM `wp_posts` LEFT OUTER JOIN `wp_term_relationships` ON `wp_term_relationships`.`object_id` = `wp_posts`.`ID` INNER JOIN `wp_term_taxonomy` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` INNER JOIN `wp_terms` ON `wp_terms`.`term_id` = `wp_term_taxonomy`.`term_id` WHERE `wp_term_taxonomy`.`taxonomy` = \'category\' AND `wp_posts`.`ID` = %i;' % wp_post_id)
     for cat in wp_cursor.fetchall():
         category = Category.objects.get_or_create(name=cat['name'], slug=cat['slug'])[0]
