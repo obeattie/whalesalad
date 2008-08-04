@@ -10,8 +10,8 @@
 <div class="post" id="post-{{ post.id }}">
     <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
     <h3>Posted {{ post.published|timesince }} ago at {{ post.published|time:"P" }} &bull; <a href="{{ post.get_absolute_url }}#comments">{% ifequal post_comment_count 0 %}Zero{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} comment{{ post_comment_count|pluralize }}</a>{% if user.is_staff %} &bull; <a href="{{ post.get_admin_url }}">Edit Post</a>{% endif %}</h3>
-    {{ post.body|linebreaks }}
     {{ post.intro|linebreaks }}
+    {{ post.body|linebreaks }}
 </div>
 {% else %}
 <div class="post" id="post-<?php the_ID(); ?>">

@@ -40,6 +40,6 @@ class Post(models.Model):
             'day': self.published.day,
             'slug': self.slug,
         })
-        
+    
     def get_admin_url(self):
         return u'/admin/blog/post/%s/' % quote(self.id)
