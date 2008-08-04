@@ -91,6 +91,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    # Custom processors
+    'whalesalad.blog.context_processors.add_recent_posts',
+    'whalesalad.misc.context_processors.add_settings',
+)
+
 try:
     from local_settings import *
 except ImportError:

@@ -56,8 +56,8 @@
             {% block recent_entries %}
             <h2>Recent Entries</h2>
             <ul>
-                {% for e in recent_entries %}
-                    <li>entry</li>
+                {% for entry in recent_posts %}
+                    <li><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
                 {% endfor %}
             </ul>
             {% endblock %}

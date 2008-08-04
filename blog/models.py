@@ -29,6 +29,9 @@ class Post(models.Model):
     # Manager
     objects = PostManager()
     
+    class Meta:
+        ordering = ('-published', )
+    
     def __unicode__(self):
         return self.title
     
