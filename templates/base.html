@@ -58,8 +58,8 @@
             {% block recent_entries %}
             <h2>Recent Entries</h2>
             <ul>
-                {% for e in recent_entries %}
-                    <li>entry</li>
+                {% for entry in recent_posts %}
+                    <li><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
                 {% endfor %}
             </ul>
             {% endblock %}
@@ -111,7 +111,7 @@
                 <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
                 <h3>Posted {{ post.published|timesince }} ago at {{ post.published|time:"P" }} &bull; <a href="{{ post.get_absolute_url }}#comments">{% ifequal post_comment_count 0 %}Zero{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} comment{{ post_comment_count|pluralize }}</a>{% if user.is_staff %} &bull; <a href="{{ post.get_admin_url }}">Edit Post</a>{% endif %}</h3>
                 {{ post.intro|linebreaks }}
-                <a href="{{ post.get_absolute_url }}">Continue Reading...</a>
+                {% if post.body %}<a href="{{ post.get_absolute_url }}">Continue Reading...</a>{% endif %}
             </div>
             {% endfor %}
         {% else %}
@@ -126,7 +126,7 @@
                 {% if page_obj.has_previous %}<div class="left"><a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">&laquo; Older Entries</a></div>{% endif %}
                 {% if page_obj.has_next %}<div class="right"><a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Recent Entries &raquo;</a></div>{% endif %}
             </div>
-            {% endif %}            
+            {% endif %}
         {% endblock %}
         </div>
         <!-- end #content -->

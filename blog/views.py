@@ -9,7 +9,7 @@ def index(request, page=None):
     
     return generic_list_detail.object_list(
         request=request,
-        queryset=blog_models.Post.objects.get_public(),
+        queryset=blog_models.Post.objects.get_public().order_by('-published'),
         paginate_by=10,
         page=int(page),
         template_name='home.html',

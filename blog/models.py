@@ -29,6 +29,9 @@ class Post(models.Model):
     # Manager
     objects = PostManager()
     
+    class Meta:
+        ordering = ('-published', )
+    
     def __unicode__(self):
         return self.title
     
@@ -40,6 +43,6 @@ class Post(models.Model):
             'day': self.published.day,
             'slug': self.slug,
         })
-        
+    
     def get_admin_url(self):
         return u'/admin/blog/post/%s/' % quote(self.id)
