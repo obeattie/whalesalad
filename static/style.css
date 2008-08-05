@@ -104,6 +104,16 @@ body {
         color: #FF2C77;
     }
     
+    #content p a {
+        color: #999;
+        text-decoration: none;
+    }
+    
+    #content p a:hover {
+        color: #EEE;
+        border-bottom: 1px dotted #EEE;
+    }
+    
     a:hover {
         text-decoration: none;
     } 
