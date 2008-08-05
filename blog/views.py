@@ -9,7 +9,7 @@ def index(request, page=None):
     
     return generic_list_detail.object_list(
         request=request,
-        queryset=blog_models.Post.objects.get_public().order_by('-published'),
+        queryset=blog_models.Post.objects.get_published().order_by('-published'),
         paginate_by=10,
         page=int(page),
         template_name='home.html',
@@ -23,7 +23,7 @@ def post_detail(request, year, month, day, slug):
        to use named URL patterns for reverse URL matching)."""
     return generic_date_based.object_detail(
         request=request,
-        queryset=blog_models.Post.objects.get_public(),
+        queryset=blog_models.Post.objects.get_published(),
         date_field='published',
         year=year,
         month=month,

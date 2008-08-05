@@ -72,9 +72,27 @@ def migrate_categories(wp_post_id, django_post_obj):
         django_post_obj.categories.add(category)
         django_post_obj.save()
 
+def check_slug(slug):
+    slug = slug[:50]
+    if not Post.objects.filter(slug__exact=slug).count() > 0:
+        return slug
+    else:
+        slug = slug[:48]
+        counter = 1
+        unique = False
+        reformed_slug_base = '%s-' % slug
+        reformed_slug = '%s%i' % (reformed_slug_base, counter)
+        while not unique:
+            if not Post.objects.filter(slug__exact=reformed_slug).count() > 0:
+                unique = True
+                break
+            counter += 1
+            reformed_slug = '%s%i' % (reformed_slug_base, counter)
+        return reformed_slug
+
 def migrate_posts():
     """Migrates all of the posts from Wordpress to Django."""
-    wp_cursor.execute('SELECT * FROM `wp_posts` WHERE `post_type` = \'post\';')
+    wp_cursor.execute('SELECT * FROM `wp_posts` WHERE `post_type` = \'post\' AND `post_status` = \'publish\';')
     for post in wp_cursor.fetchall():
         # Iterate over every post
         content = post['post_content'].split('<!--more-->')
@@ -85,10 +103,10 @@ def migrate_posts():
             content = [content[0], u''.join(content[1:])]
         post_obj = Post.objects.create(
             title=post['post_title'],
-            slug=post['post_name'],
+            slug=check_slug(post['post_name'])[:50],
             published=localize_dt(post['post_date_gmt']),
             author=superuser,
-            is_public=post['post_status'] == 'publish',
+            is_public=True,
             intro=content[0],
             body=content[1]
         )

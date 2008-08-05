@@ -101,6 +101,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'whalesalad.misc.context_processors.add_settings',
 )
 
+INITIAL_AKISMET_COUNT = 24309
+
 try:
     from local_settings import *
 except ImportError:

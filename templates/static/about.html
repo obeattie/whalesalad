@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load humanize %}
 
 {% block title %}{{ block.super }} &raquo; About{% endblock %}
 {% block body %}about{% endblock %}
@@ -28,6 +28,6 @@
     <p>Finally, Whalesalad.com (the site you're on right now) is being powered by a fresh copy of Wordpress <?php bloginfo('version'); ?>. and a lightweight custom theme coined Elixir. I got tired of my old <a href="http://www.whalesalad3.com">Moscow</a> theme, and created this as a temporary theme until WS4 "Fusion" is released. If you like what you see, you're in luck, because I've released the theme free of charge in five fruitalicious colors! <a href="/2007/07/23/elixir/">Check it out &raquo;</a></p>
 
     <h4>For the stats junkies</h4>
-    <p>The site currently consists of <strong><?php echo $numposts; ?></strong> posts and <strong><?php echo $numcomms; ?></strong> comments. The site is currently runnin' hot on a screamin' dedicated server, which also happens to be the playground and sandbox of <a href="http://devskunk.com">Devskunk</a>. <?php printf(__('<a href="http://www.akismet.com">Akismet</a> has caught <strong>%1$s</strong> spam messages since installation.'), number_format($count) ); ?></p>
+    <p>The site currently consists of <strong>{{ posts_counter|apnumber|intcomma }}</strong> posts and <strong>{{ comments_counter|apnumber|intcomma }}</strong> comments. The site is currently runnin' hot on a screamin' dedicated server, which also happens to be the playground and sandbox of <a href="http://devskunk.com">Devskunk</a>. <a href="http://www.akismet.com">Akismet</a> has caught <strong>{{ akismet_counter|apnumber|intcomma }}</strong> spam messages since installation.</p>
 
 {% endblock %}
