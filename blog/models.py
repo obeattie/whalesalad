@@ -23,6 +23,7 @@ class Post(models.Model):
     is_public = models.BooleanField(default=False, help_text=_(u'Whether or not the entry is publicly viewable'))
     categories = models.ManyToManyField(Category, blank=True, null=True, related_name='blog_posts')
     tags = TagField(blank=True, null=True, model=PostTag)
+    comments_enabled = models.BooleanField(default=True, help_text=_(u'Uncheck and comments on this entry will be disabled'))
     # The post
     intro = models.TextField(_(u'introduction'), blank=False, null=False)
     body = models.TextField(_(u'post body'), blank=True, null=True)

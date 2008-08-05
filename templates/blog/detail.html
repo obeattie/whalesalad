@@ -1,28 +1,45 @@
 {% extends "base.html" %}
-{% load humanize comments %}
+{% load humanize comments urls %}
 
 {% block title %}{{ block.super }} &raquo; About{% endblock %}
 {% block body %}blog{% endblock %}
 
 {% block content %}
-{% if post %}
-{% get_comment_count post as post_comment_count %}
+{% get_comment_count post as post_comment_count %}{% get_comments post as post_comments %}
+
 <div class="post" id="post-{{ post.id }}">
     <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
     <h3>Posted {{ post.published|timesince }} ago at {{ post.published|time:"P" }} &bull; <a href="{{ post.get_absolute_url }}#comments">{% ifequal post_comment_count 0 %}Zero{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} comment{{ post_comment_count|pluralize }}</a>{% if user.is_staff %} &bull; <a href="{{ post.get_admin_url }}">Edit Post</a>{% endif %}</h3>
     {{ post.intro|safe|linebreaks }}
     {{ post.body|safe|linebreaks }}
 </div>
-{% else %}
-<div class="post" id="post-<?php the_ID(); ?>">
-    <h2>Nothing to see here</h2>
-    <p>You seemed to have found a mislinked file, page, or search query with zero results. If you feel that you've reached this page in error, double check the URL and or search string and try again.</p>
-    <p>Alternatively, a more personalized method of tracking down and searching for content can be found <a href="#bottom_box">below</a>.</p>
-</div>
-{% endif %}
 
 <div class="commentArea">
-<?php comments_template(); ?>
+    {% if post.comments_enabled %}<h2 id="comments">{% ifequal post_comment_count 0 %}No{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} {{ post_comment_count|pluralize:"Reply,Replies" }}</h2>{% endif %}
+    {% if post_comments %}
+    <ol class="commentlist">
+        {% for comment in post_comments %}
+        <li class="{% cycle alt,even %}{% ifequal comment.author_email post.author.email %} author{% endifequal %} item" id="comment-{{ comment.id }}">
+            <div class="commentMeta">
+                {% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}<img alt="Gravatar" src="{{ comment.author_email|gravatar }}" class="avatar avatar-60" height="60" width="60" />{% if comment.author_url %}</a>{% endif %}
+                <span class="author">{% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}{{ comment.author_name }}{% if comment.author_url %}</a>{% endif %}</span>
+                <span class="date"><a href="#comment-{{ comment.id }}" title="Comment Permalink">{{ comment.timestamp|date:"N jS Y" }}</a></span>
+                {% if request.user.is_staff %}<span class="moderate"><a href="/admin/comments/comment/{{ comment.id }}/">Moderate</a></span>{% endif %}
+            </div>
+            <div class="commentText">
+                {{ comment.comment|linebreaks }}
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    {% if post.comments_enabled %}
+    <p>Feel free to leave a reply using the form below!</p>
+    {% else %}
+    <p class="nocomments">Comments are closed.</p>
+    {% endif %}
+    {% endif %}
 </div>
-
 {% endblock %}
+        
