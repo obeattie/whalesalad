@@ -37,7 +37,9 @@ wp_cursor = MySQLdb.connect(
 
 # Import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from whalesalad.blog.models import Post, PostTag
+from whalesalad.comments.models import Comment
 from whalesalad.metadata.models import Category
 
 superuser = User.objects.filter(is_superuser=True)[0]
@@ -71,6 +73,25 @@ def migrate_categories(wp_post_id, django_post_obj):
         category = Category.objects.get_or_create(name=cat['name'], slug=cat['slug'])[0]
         django_post_obj.categories.add(category)
         django_post_obj.save()
+
+def migrate_comments(wp_post_id, django_post_obj):
+    """Brings all comments over from Wordpress to Django."""
+    wp_cursor.execute('SELECT * FROM `wp_comments` WHERE `wp_comments`.`comment_post_ID` = %i AND `wp_comments`.`comment_approved` = \'1\' AND `wp_comments`.`comment_type` = \'\';' % wp_post_id)
+    for comment in wp_cursor.fetchall():
+        content_type = ContentType.objects.get_for_model(django_post_obj.__class__)
+        Comment.objects.create(
+            author_name=comment['comment_author'],
+            author_email=comment['comment_author_email'],
+            author_url=comment['comment_author_url'],
+            author_ip=comment['comment_author_IP'],
+            timestamp=localize_dt(comment['comment_date_gmt']),
+            comment=comment['comment_content'],
+            approved=True,
+            spam=False,
+            processed=True,
+            content_type=content_type,
+            object_id=django_post_obj.id,
+        )
 
 def check_slug(slug):
     slug = slug[:50]
@@ -107,10 +128,12 @@ def migrate_posts():
             published=localize_dt(post['post_date_gmt']),
             author=superuser,
             is_public=True,
+            comments_enabled=post['comment_status'] == 'open',
             intro=content[0],
-            body=content[1]
+            body=content[1],
         )
         # Migrate metadata
         migrate_tags(post['ID'], post_obj)
         migrate_categories(post['ID'], post_obj)
+        migrate_comments(post['ID'], post_obj)
         print post_obj

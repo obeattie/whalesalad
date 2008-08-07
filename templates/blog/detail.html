@@ -1,84 +1,48 @@
 {% extends "base.html" %}
-{% load humanize comments %}
+{% load humanize comments urls %}
 
 {% block title %}{{ block.super }} &raquo; About{% endblock %}
 {% block body %}blog{% endblock %}
 
 {% block content %}
-{% if post %}
-{% get_comment_count post as post_comment_count %}
+{% get_comment_count post as post_comment_count %}{% get_comments post as post_comments %}
+
 <div class="post" id="post-{{ post.id }}">
     <h2><a href="{{ post.get_absolute_url }}" rel="bookmark" title="{{ post.title }}">{{ post.title|title }}</a></h2>
     <h3>Posted {{ post.published|timesince }} ago at {{ post.published|time:"P" }} &bull; <a href="{{ post.get_absolute_url }}#comments">{% ifequal post_comment_count 0 %}Zero{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} comment{{ post_comment_count|pluralize }}</a>{% if user.is_staff %} &bull; <a href="{{ post.get_admin_url }}">Edit Post</a>{% endif %}</h3>
     {{ post.intro|safe|linebreaks }}
     {{ post.body|safe|linebreaks }}
 </div>
-{% else %}
-<div class="post" id="post-<?php the_ID(); ?>">
-    <h2>Nothing to see here</h2>
-    <p>You seemed to have found a mislinked file, page, or search query with zero results. If you feel that you've reached this page in error, double check the URL and or search string and try again.</p>
-    <p>Alternatively, a more personalized method of tracking down and searching for content can be found <a href="#bottom_box">below</a>.</p>
-</div>
-{% endif %}
 
 <div class="commentArea">
-    {#% if comments %#}
-    <h2 id="comments">Four Replies</h2>
-    <p>Feel free to leave a reply using the form below!</p>
+    {% if post.comments_enabled %}<h2 id="comments">{% ifequal post_comment_count 0 %}No{% else %}{{ post_comment_count|apnumber|title }}{% endifequal %} {{ post_comment_count|pluralize:"Reply,Replies" }}</h2>{% endif %}
+
+    {% if post_comments %}
     <ol class="commentlist">
-        {% for c in comments %}
-        <li class="after item {% cycle odd,even %}" id="comment-{{ c.id }}">
+        {% for comment in post_comments %}
+        <li class="{% cycle alt,even %}{% ifequal comment.author_email post.author.email %} author{% endifequal %} item" id="comment-{{ comment.id }}">
             <div class="commentMeta">
-                <!-- XXX GRAVATAR? -->
-                <span class="author">{{ c.author }}</span>
-                <span class="date"><a href="{{ post.get_absolute_url }}#comment-{{ c.id }}" title="Comment Permalink"><?php comment_date('M jS Y') ?></a></span>
-                <span class="moderate"><?php edit_comment_link('Moderate','',''); ?></span>
-            </div>  
-            <div class="commentText">
-                {% if not comment.approved %}
-                    <p><strong>Your comment is awaiting moderation.</strong></p>
-                {% else %}
-                    {{ comment.comment|linebreaks }}
-                {% endif %}
+                {% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}<img alt="Gravatar" src="{{ comment.author_email|gravatar }}" class="avatar avatar-60" height="60" width="60" />{% if comment.author_url %}</a>{% endif %}
+                <span class="author">{% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}{{ comment.author_name }}{% if comment.author_url %}</a>{% endif %}</span>
+                <span class="date"><a href="#comment-{{ comment.id }}" title="Comment Permalink">{{ comment.timestamp|date:"N jS Y" }}</a></span>
+                {% if request.user.is_staff %}<span class="moderate"><a href="/admin/comments/comment/{{ comment.id }}/">Moderate</a></span>{% endif %}
             </div>
-        </li>   
+            <div class="commentText">
+                {{ comment.comment|linebreaks }}
+            </div>
+            <div class="clearfix"></div>
+        </li>
         {% endfor %}
     </ol>
-    {#% else %#}
-    <p>There aren't any comments yet</p>
-    {#% endif %#}
-    
-    <br />
-    <h3 id="respond">Leave a Reply</h3>
-    
-    <form action="." method="post" id="commentForm">
-    
-    {% if user.is_authenticated %}
-    <p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out">Logout &raquo;</a></p>
     {% else %}
-    <p>
-        <label for="author">Name <?php if ($req) echo "(required)"; ?></label>
-        <input type="text" name="author" id="author" value="" size="22" tabindex="1" />
-    </p>
     
-    <p>
-        <label for="email">Mail <?php if ($req) echo "(required)"; ?></label>
-        <input type="text" name="email" id="email" value="" size="22" tabindex="2" />
-    </p>
-    
-    <p>
-        <label for="url">Website</label>
-        <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
-    </p>
+    {% if post.comments_enabled %}
+    <p>Feel free to leave a reply using the form below!</p>
+    {% else %}
+    <p class="nocomments">Comments are closed.</p>
     {% endif %}
     
-    <p><textarea name="comment" id="comment" cols="60" rows="10" tabindex="4"></textarea></p>
-    <p>
-        <input name="submit" type="submit" id="submit" tabindex="5" value="Post Comment" />
-        <input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
-    </p>
-    </form>
-    <br />
+    {% endif %}
 </div>
-
 {% endblock %}
+        
