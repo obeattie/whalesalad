@@ -102,7 +102,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INITIAL_AKISMET_COUNT = 24309
-DEFAULT_AVATAR_PATH = '/static/img/avatar.jpg'
+DEFAULT_AVATAR_PATH = 'http://whale.salad/static/img/avatar.png'
 
 try:
     from local_settings import *

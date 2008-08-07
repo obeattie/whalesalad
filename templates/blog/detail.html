@@ -22,9 +22,9 @@
         {% for comment in post_comments %}
         <li class="{% cycle alt,even %}{% ifequal comment.author_email post.author.email %} author{% endifequal %} item" id="comment-{{ comment.id }}">
             <div class="commentMeta">
-                {% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}<img alt="Gravatar" src="{{ comment.author_email|gravatar }}" class="avatar avatar-60" height="60" width="60" />{% if comment.author_url %}</a>{% endif %}
                 <span class="author">{% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}{{ comment.author_name }}{% if comment.author_url %}</a>{% endif %}</span>
                 <span class="date"><a href="#comment-{{ comment.id }}" title="Comment Permalink">{{ comment.timestamp|date:"N jS Y" }}</a></span>
+                {% if comment.author_url %}<a href="{{ comment.author_url }}">{% endif %}<div class="avatarWrapper"><div class="avatarOverlay"></div><img alt="Gravatar" src="{{ comment.author_email|gravatar }}" class="avatar avatar-60" height="60" width="60" /></div>{% if comment.author_url %}</a>{% endif %}
                 {% if request.user.is_staff %}<span class="moderate"><a href="/admin/comments/comment/{{ comment.id }}/">Moderate</a></span>{% endif %}
             </div>
             <div class="commentText">

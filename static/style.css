@@ -166,24 +166,37 @@ body {
         #content ol.commentlist li .commentMeta {
             width: 120px;
             float: left;
-            margin-top: 5px;
+            margin-top: 7px;
             text-align: right;
         }
 
-            #content ol.commentlist li .commentMeta img.avatar {
-                margin: 7px 0 10px 0;
-                padding: 1px;
-                background-color: #5B5B5B;
-                border: 1px solid #747474;
-            }   
-        
+            #content ol.commentlist li .commentMeta .avatarWrapper {
+                width: 64px;
+                height: 64px;
+                margin: 7px 0 10px 57px;
+                display: block;
+                position: relative;
+            }
+            
+            #content ol.commentlist li .commentMeta .avatarWrapper .avatarOverlay {
+                position: absolute;
+                width: 64px;
+                height: 64px;
+                background: url(/static/img/avatarOverlay.png) top left no-repeat;
+                display: block;
+            }
+            
+                #content ol.commentlist li .commentMeta .avatarWrapper img.avatar {
+                    padding: 1px 2px 3px 2px;
+                }
+                    
             #content ol.commentlist li .commentMeta span {
                 display: block;
             }
             
             #content ol.commentlist li .commentMeta span.author,
             #content ol.commentlist li .commentMeta span.author a {
-                color: #CCC;    
+                color: #999;    
                 text-decoration: none;
                 margin-bottom: 5px;
                 font-size: 12px;
