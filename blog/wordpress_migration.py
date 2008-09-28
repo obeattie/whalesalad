@@ -2,7 +2,7 @@
     Converts blog posts, categories, tags and comments. I think that should cover
     everything.
     
-    By Oliver Beattie. """
+    By Oliver Beattie."""
 
 # Wordpress DB Config -- SET THESE!
 WP_DB_NAME = ''
@@ -137,3 +137,7 @@ def migrate_posts():
         migrate_categories(post['ID'], post_obj)
         migrate_comments(post['ID'], post_obj)
         print post_obj
+
+if __name__ == '__main__':
+    # Run the conversion
+    migrate_posts()

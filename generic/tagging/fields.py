@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from whalesalad.generic.tagging import settings
 from whalesalad.generic.tagging.models import Tag
 from whalesalad.generic.tagging.utils import edit_string_for_tags
-from whalesalad.generic.tagging.validators import isTagList
+from whalesalad.generic.tagging.validators import is_tag_list
 
 class TagField(CharField):
     """
@@ -21,7 +21,6 @@ class TagField(CharField):
         self.model = model
         kwargs['max_length'] = kwargs.get('max_length', 255)
         kwargs['blank'] = kwargs.get('blank', True)
-        kwargs['validator_list'] = [isTagList] + kwargs.get('validator_list', [])
         super(TagField, self).__init__(*args, **kwargs)
 
     def contribute_to_class(self, cls, name):
@@ -31,7 +30,7 @@ class TagField(CharField):
         setattr(cls, self.name, self)
 
         # Save tags back to the database post-save
-        dispatcher.connect(self._save, signal=signals.post_save, sender=cls)
+        signals.post_save.connect(self._save, sender=cls)
 
     def __get__(self, instance, owner=None):
         """
@@ -75,7 +74,7 @@ class TagField(CharField):
             value = value.lower()
         self._set_instance_tag_cache(instance, value)
 
-    def _save(self, signal, sender, instance):
+    def _save(self, signal, sender, instance, **kwargs):
         """
         Save tags back to the database
         """
